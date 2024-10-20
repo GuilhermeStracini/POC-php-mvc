@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use GuiBranco\PocMvc\Src\DIContainer;
+use GuiBranco\PocMvc\Src\Container\DIContainer;
 
 class DIContainerTest extends TestCase
 {

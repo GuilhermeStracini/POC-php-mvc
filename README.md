@@ -163,7 +163,7 @@ $container->set(HomeController::class, function() {
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/guibranco/poc-php-mvc.git
+   git clone https://github.com/GuilhermeStracini/poc-php-mvc.git
    cd poc-php-mvc
    ```
 
@@ -201,7 +201,7 @@ Once the application is running:
 
 You can deploy this project to Vercel with just one click! Vercel is a great platform for hosting PHP projects with zero configuration. Follow the steps below to deploy this example to Vercel.
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/guibranco/poc-php-mvc)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/GuilhermeStracini/poc-php-mvc)
 
 ### Steps to Deploy
 

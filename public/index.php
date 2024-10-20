@@ -8,4 +8,5 @@ $app = new Application();
 $registration = new Registration($app);
 $registration->addServices();
 $registration->registerRoutes();
+$registration->registerApiControllers();
 $app->run();

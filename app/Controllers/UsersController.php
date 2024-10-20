@@ -2,36 +2,24 @@
 
 namespace GuiBranco\PocMvc\App\Controllers;
 
+use GuiBranco\PocMvc\App\Models\UserModel;
 use GuiBranco\PocMvc\Src\Controller\BaseController;
 
 class UsersController extends BaseController
 {
-    private array $users = [];
-
-    public function __construct(string $viewsPath)
-    {
-        parent::__construct($viewsPath);
-
-        $this->users = [
-            1 => ['name' => 'John Doe', 'email' => 'john.doe@example.com'],
-            2 => ['name' => 'Jane Doe', 'email' => 'jane.doe@example.com'],
-        ];
-    }
-
     public function index()
     {
-        return $this->view('index', ['title' => 'List of users', 'users' => $this->users], 'layout');
+        return $this->view('index', ['title' => 'List of users', 'users' => UserModel::all()], 'layout');
     }
-
 
     public function show(array $params)
     {
         $id = $params['id'] ?? 0;
 
-        if (!array_key_exists($id, $this->users)) {
+        if (!array_key_exists($id, UserModel::all())) {
             return $this->view('error', ['title' => 'User not found'], 'layout');
         }
 
-        return $this->view('show', ['title' => 'User details', 'user' => $this->users[$id]], 'layout');
+        return $this->view('show', ['title' => 'User details', 'user' => UserModel::find($id)], 'layout');
     }
 }

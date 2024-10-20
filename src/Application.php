@@ -12,7 +12,7 @@ class Application
     public function __construct()
     {
         $this->container = new DIContainer();
-        $this->router = new Router();
+        $this->router = new Router($this->container);
     }
 
     /**
@@ -73,7 +73,6 @@ class Application
         } catch (\Exception $e) {
             http_response_code(404);
             echo '404 Not Found';
-            print_r($e->getMessage());
         }
     }
 }

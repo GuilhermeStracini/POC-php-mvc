@@ -1,22 +1,27 @@
-<h1><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></h1>
-<p><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></p>
-
-<table width="100%">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Email</th>
-            <th>Details</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <?php foreach ($users as $id => $user) { ?>
-            <tr>
-                <td><?= htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8') ?></td>
-                <td><?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') ?></td>
-                <td><a href="/users/<?= $id ?>">Details</a></td>
-            </tr>
-        <?php } ?>
-    </tbody>
-</table>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Users List</h2>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($user['name']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td>
+                                <a href="/users/<?php echo $user['id']; ?>" class="btn btn-info">View Details</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
