@@ -4,6 +4,7 @@ namespace GuiBranco\PocMvc\App;
 
 use GuiBranco\PocMvc\App\Controllers\AboutController;
 use GuiBranco\PocMvc\App\Controllers\ApiController;
+use GuiBranco\PocMvc\App\Controllers\AuthController;
 use GuiBranco\PocMvc\App\Controllers\ContactController;
 use GuiBranco\PocMvc\App\Controllers\HomeController;
 use GuiBranco\PocMvc\App\Controllers\UsersApiController;
@@ -27,6 +28,7 @@ class Registration
     {
         $viewsPath = __DIR__ . '/views';
         $this->container->set(AboutController::class, fn($c) => new AboutController($viewsPath));
+        $this->container->set(AuthController::class, fn($c) => new AuthController($viewsPath));
         $this->container->set(ContactController::class, fn($c) => new ContactController($viewsPath));
         $this->container->set(HomeController::class, fn($c) => new HomeController($viewsPath));
         $this->container->set(UsersController::class, fn($c) => new UsersController($viewsPath));
@@ -42,9 +44,15 @@ class Registration
         $this->router->add('GET', '/docs', [$this->container->get(HomeController::class), 'docs']);
         $this->router->add('GET', '/sandbox', [$this->container->get(HomeController::class), 'sandbox']);
         $this->router->add('GET', '/sections', [$this->container->get(HomeController::class), 'sections']);
+
+        $this->router->add('GET', '/login', [$this->container->get(AuthController::class), 'login']);
+        $this->router->add('POST', '/login', [$this->container->get(AuthController::class), 'login']);
+        $this->router->add('GET', '/logout', [$this->container->get(AuthController::class), 'logout']);
+
         $this->router->add('GET', '/about', [$this->container->get(AboutController::class), 'index']);
         $this->router->add('GET', '/contact', [$this->container->get(ContactController::class), 'showForm']);
         $this->router->add('POST', '/contact/submit', [$this->container->get(ContactController::class), 'handleFormSubmission']);
+
         $this->router->add('GET', '/users', [$this->container->get(UsersController::class), 'index']);
         $this->router->add('GET', '/users/{id}', [$this->container->get(UsersController::class), 'show']);
 
@@ -52,7 +60,8 @@ class Registration
         $this->router->add('GET', '/api/v1', [$this->container->get(id: ApiController::class), 'index']);
     }
 
-    public function registerApiControllers(): void {
-        $this->router->registerApiController( UsersApiController::class);
+    public function registerApiControllers(): void
+    {
+        $this->router->registerApiController(UsersApiController::class);
     }
 }
