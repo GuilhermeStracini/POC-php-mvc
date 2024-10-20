@@ -1,6 +1,6 @@
 <?php
 
-namespace GuiBranco\PocMvc\Src;
+namespace GuiBranco\PocMvc\Src\Core;
 
 class SessionManager
 {

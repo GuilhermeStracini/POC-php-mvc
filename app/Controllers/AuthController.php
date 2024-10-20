@@ -2,7 +2,7 @@
 
 namespace GuiBranco\PocMvc\App\Controllers;
 
-use GuiBranco\PocMvc\Src\SessionManager;
+use GuiBranco\PocMvc\Src\Core\SessionManager;
 use GuiBranco\PocMvc\Src\Controller\BaseController;
 
 class AuthController extends BaseController

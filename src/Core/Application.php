@@ -1,6 +1,7 @@
 <?php
 
-namespace GuiBranco\PocMvc\Src;
+namespace GuiBranco\PocMvc\Src\Core;
+
 use GuiBranco\PocMvc\Src\Container\DIContainer;
 use GuiBranco\PocMvc\Src\Router\Router;
 

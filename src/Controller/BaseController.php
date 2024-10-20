@@ -1,6 +1,7 @@
 <?php
 
 namespace GuiBranco\PocMvc\Src\Controller;
+use GuiBranco\PocMvc\Src\Core\BundleManager;
 
 class BaseController
 {
@@ -151,5 +152,20 @@ class BaseController
     protected function renderSection($name)
     {
         return $this->sections[$name] ?? '';
+    }
+
+    protected function renderBundles($bundleName)
+    {
+        $assets = BundleManager::getBundle($bundleName);
+
+        foreach ($assets as $asset) {
+            if (preg_match('/\.css$/', $asset)) {
+                echo "<link rel='stylesheet' href='$asset' />\n";
+            } elseif (preg_match('/\.js$/', $asset)) {
+                echo "<script src='$asset'></script>\n";
+            } elseif (preg_match('/\.(woff|woff2|ttf|eot)$/', $asset)) {
+                echo "<link rel='preload' href='$asset' as='font' type='font/woff2' crossorigin='anonymous' />\n";
+            }
+        }
     }
 }

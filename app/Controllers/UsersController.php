@@ -3,7 +3,7 @@
 namespace GuiBranco\PocMvc\App\Controllers;
 
 use GuiBranco\PocMvc\App\Models\UserModel;
-use GuiBranco\PocMvc\Src\SessionManager;
+use GuiBranco\PocMvc\Src\Core\SessionManager;
 use GuiBranco\PocMvc\Src\Controller\BaseController;
 
 class UsersController extends BaseController
