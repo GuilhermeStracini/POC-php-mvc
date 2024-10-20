@@ -10,11 +10,12 @@ This project is a **Proof of Concept (PoC)** for a custom-built **PHP MVC framew
   - [PSRs in Use](#psrs-in-use)
   - [Directory Structure](#directory-structure)
   - [What We Will Build](#what-we-will-build)
+    - [Key Features:](#key-features)
+    - [API Documentation](#api-documentation)
     - [Example Code](#example-code)
       - [`app/Controllers/HomeController.php`](#appcontrollershomecontrollerphp)
-      - [`app/routes.php`](#approutesphp)
       - [`public/index.php`](#publicindexphp)
-      - [`config/dependencies.php`](#configdependenciesphp)
+      - [`app/Config/Registration.php`](#appconfigregistrationphp)
   - [Requirements](#requirements)
   - [Getting Started](#getting-started)
   - [Expected Outcome](#expected-outcome)
@@ -26,6 +27,7 @@ This project is a **Proof of Concept (PoC)** for a custom-built **PHP MVC framew
     - [Prerequisites](#prerequisites)
     - [Running with Apache](#running-with-apache)
     - [Running with NGINX and PHP-FPM](#running-with-nginx-and-php-fpm)
+  - [Tests](#tests)
 
 ## Introduction
 
@@ -50,24 +52,88 @@ The project follows a clear structure that separates concerns into Controllers, 
 ```bash
 /project-root
 │
-├── app/
-│   ├── Controllers/
-│   │   └── HomeController.php   # Contains the controllers for the app
-│   ├── Views/
-│   │   └── home.php             # Contains the view templates
-│   └── routes.php               # Defines all application routes
-│
-├── public/
-│   └── index.php                # The entry point for the application (Front controller)
-│
-├── src/
-│   ├── Router.php               # Custom router class
-│   └── Container.php            # PSR-11 compliant DI container
-│
-├── vendor/                      # Composer dependencies
-│
-├── composer.json                # Composer configuration (autoloading via PSR-4)
-└── README.md                    # This file
+├───app
+│   ├───Config
+│   │       BundleRegistration.php       # Handles the registration of static bundles (CSS, JS, etc.)
+│   │       Registration.php             # Registers application services and controllers
+│   │       
+│   ├───Controllers                      # Contains all application controllers
+│   │       AboutController.php          # Controller for the About page
+│   │       ApiController.php            # Handles general API endpoints
+│   │       AuthController.php           # Handles authentication─related actions
+│   │       ContactController.php        # Manages the Contact form
+│   │       HomeController.php           # Handles the home and sandbox pages
+│   │       UsersApiController.php       # API Controller for user─related endpoints
+│   │       UsersController.php          # Controller for user management
+│   │       
+│   ├───Models                           # Contains the application's models
+│   │       ContactModel.php             # Model representing the contact form data
+│   │       UserModel.php                # Model representing a user
+│   │       
+│   └───Views                            # Contains the views rendered in response to requests
+│       ├───About
+│       │       index.php                # About page view
+│       │       
+│       ├───Auth
+│       │       login.php                # Login page view
+│       │       
+│       ├───Contact
+│       │       index.php                # Contact form view
+│       │       
+│       ├───Home
+│       │       docs.php                 # API documentation view
+│       │       index.php                # Home page view
+│       │       sandbox.php              # Sandbox view for testing API requests
+│       │       sections.php             # View demonstrating the use of sections in layouts
+│       │       
+│       ├───Shared
+│       │       layout.php               # Shared layout file for consistent structure
+│       │       
+│       └───Users
+│               index.php                # View listing all users
+│               show.php                 # View showing user details
+│               
+├───nginx                                # NGINX configuration for running the application
+│       Dockerfile                       # Dockerfile to build NGINX environment
+│       nginx.conf                       # NGINX configuration file
+│       
+├───public                               # Publicly accessible directory (web root)
+│   │   index.php                        # Application entry point
+│   │   
+│   └───assets                           # Static assets
+│           scripts.js                   # Custom JS for the application
+│           styles.css                   # Custom styles for the application
+│           
+├───src                                  # Core application logic
+│   ├───Container
+│   │       DIContainer.php              # Dependency Injection Container
+│   │       
+│   ├───Controller
+│   │       ApiBaseController.php        # Base controller for API endpoints
+│   │       BaseController.php           # Main base controller for all standard controllers
+│   │       
+│   ├───Core
+│   │       Application.php              # Main Application class that bootstraps the framework
+│   │       BundleManager.php            # Manages static asset bundles (CSS, JS)
+│   │       SessionManager.php           # Manages session functionality
+│   │       
+│   └───Router
+│           Router.php                   # Router class for handling routes
+│           
+├───tests                                # Unit and integration tests for the framework
+│   │   phpunit.xml                      # PHPUnit configuration file
+│   │   
+│   ├───Integration
+│   │       FullAppTest.php              # Integration test covering full application behavior
+│   │       HomeControllerTest.php       # Integration test for HomeController
+│   │       
+│   └───Unit
+│           DIContainerTest.php          # Unit test for DI Container
+│           RouterTest.php               # Unit test for Router
+│           
+├───vendor                               # Composer dependencies
+│──composer.json                         # Composer configuration file
+└──README.md                             # Project documentation
 
 ```
 
@@ -80,6 +146,27 @@ We will build a **minimalistic PHP framework** with the following components:
 3. **MVC Pattern**: We will adhere to the MVC (Model-View-Controller) architecture, separating logic into Controllers and Views.
 4. **PSR-4 Autoloading**: The project structure is set up for PSR-4 compliant autoloading using Composer.
 
+### Key Features:
+
+1. **Routing**: 
+   - Custom router that supports dynamic routes with parameters.
+   - Automatic route registration using attributes.
+   - Handles static files and supports trailing slashes.
+
+2. **Dependency Injection (DI)**:
+   - Custom DI container to manage class dependencies.
+   - Services and controllers are registered through the `Registration.php` file.
+
+3. **Static Bundling**:
+   - Bundles CSS, JS, and other assets using the `BundleManager` class.
+
+4. **Session Management**:
+   - Custom session handling using the `SessionManager`.
+
+### API Documentation
+
+The project also includes a simple REST API for user management, located at `/api/v1/users/`. You can find detailed documentation for this API in the [API Docs](./app/Views/Home/docs.php) view.
+
 ### Example Code
 
 The example below is a simple **HomeController** that renders a view:
@@ -89,35 +176,20 @@ The example below is a simple **HomeController** that renders a view:
 ```php
 <?php
 
-namespace GuiBranco\App\Controllers;
+namespace GuiBranco\PocMvc\App\Controllers;
 
 class HomeController
 {
     public function index()
     {
-        return view('home', ['title' => 'Home Page']);
+        return $this->view('home', ['title' => 'Home Page']);
     }
 
     public function about()
     {
-        return view('home', ['title' => 'About Us']);
+        return $this->view('home', ['title' => 'About Us']);
     }
 }
-```
-
-The router defines the available routes in the application:
-
-#### `app/routes.php`
-
-```php
-<?php
-
-use GuiBranco\App\Controllers\HomeController;
-use GuiBranco\Src\Router;
-
-$router = new Router();
-$router->get('/', [HomeController::class, 'index']);
-$router->get('/about', [HomeController::class, 'about']);
 ```
 
 The **front controller** dispatches incoming HTTP requests:
@@ -127,30 +199,40 @@ The **front controller** dispatches incoming HTTP requests:
 ```php
 <?php
 
-require '../vendor/autoload.php';
-require '../app/routes.php';
-require '../config/dependencies.php';
+use GuiBranco\PocMvc\App\Config\BundleRegistration;
+use GuiBranco\PocMvc\App\Config\Registration;
+use GuiBranco\PocMvc\Src\Core\Application;
 
-$method = $_SERVER['REQUEST_METHOD'];
-$uri = $_SERVER['REQUEST_URI'];
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$router->dispatch($method, $uri, $container);
+$app = new Application(); // The core/main application class.
+$registration = new Registration($app); // The user-defined registration class. Register routes, add services (DI/IoC), register API controllers.
+$registration->addServices();
+$registration->registerRoutes();
+$registration->registerApiControllers();
+$bundleRegistration = new BundleRegistration(); // The user-defined bundle registration. Use this to register assets in bundles to be rendered in the views.
+$bundleRegistration->registerBundles();
+$app->run(); // Run the application. Accept requests.
+
 ```
 
-Finally, the **IoC container** resolves the controller dependencies:
+Finally, the **IoC container** and **Router registration** resolves the controller dependencies and the routes:
 
-#### `config/dependencies.php`
+#### `app/Config/Registration.php`
 
 ```php
 <?php
 
-use GuiBranco\App\Controllers\HomeController;
-use GuiBranco\Src\Container;
+use GuiBranco\PocMvc\App\Controllers\HomeController;
+use GuiBranco\PocMvc\Src\Container\DIContainer;
+use GuiBranco\PocMvc\Src\Router\Router;
 
-$container = new Container();
-$container->set(HomeController::class, function() {
-    return new HomeController();
-});
+$container = new DIContainer();
+$container->set(HomeController::class, function() { return new HomeController(); });
+
+$router = new Router();
+$router->add('GET', '/', [HomeController::class, 'index']);
+$router->add('GET', '/about', [HomeController::class, 'about']);
 ```
 
 ## Requirements
@@ -195,8 +277,6 @@ Once the application is running:
 - Both pages will use the **MVC pattern**, with the controller handling logic and views rendering the HTML.
 - The application will follow **PSR-1**, **PSR-2/PSR-12**, **PSR-4**, and **PSR-11**, ensuring a scalable and maintainable codebase.
 
----
-
 ## Deploy to Vercel
 
 You can deploy this project to Vercel with just one click! Vercel is a great platform for hosting PHP projects with zero configuration. Follow the steps below to deploy this example to Vercel.
@@ -236,8 +316,6 @@ To ensure that Vercel handles your PHP app properly, you need to add a `vercel.j
 }
 ```
 
----
-
 ## Running the Project with Docker
 
 This project can be run using Docker, and we provide two variants for running the PHP 8.3 environment:
@@ -256,7 +334,7 @@ To run the project with PHP 8.3 and Apache, follow these steps:
 1. **Build and run the containers**:
 
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 2. **Access the application**:
@@ -266,7 +344,7 @@ To run the project with PHP 8.3 and Apache, follow these steps:
    To stop the running containers, use:
 
    ```bash
-   docker-compose down
+   docker compose down
    ```
 
 ### Running with NGINX and PHP-FPM
@@ -279,7 +357,7 @@ To run the project with PHP 8.3, NGINX, and PHP-FPM, follow these steps:
 2. **Build and run the containers**:
 
    ```bash
-   docker-compose -f docker-compose-nginx.yml up --build
+   docker compose -f docker-compose-nginx.yml up --build
    ```
 
 3. **Access the application**:
@@ -289,7 +367,18 @@ To run the project with PHP 8.3, NGINX, and PHP-FPM, follow these steps:
    To stop the running containers, use:
 
    ```bash
-   docker-compose -f docker-compose-nginx.yml down
+   docker compose -f docker-compose-nginx.yml down
    ```
 
----
+## Tests
+
+Unit and integration tests are provided to validate the core functionality. Run the tests with PHPUnit:
+
+```bash
+vendor/bin/phpunit tests
+```
+
+Tests are organized into two directories:
+
+- `tests/Unit`: Contains unit tests for individual components.
+- `tests/Integration`: Contains integration tests for full application functionality.

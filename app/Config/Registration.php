@@ -1,6 +1,6 @@
 <?php
 
-namespace GuiBranco\PocMvc\App;
+namespace GuiBranco\PocMvc\App\Config;
 
 use GuiBranco\PocMvc\App\Controllers\AboutController;
 use GuiBranco\PocMvc\App\Controllers\ApiController;
@@ -9,8 +9,8 @@ use GuiBranco\PocMvc\App\Controllers\ContactController;
 use GuiBranco\PocMvc\App\Controllers\HomeController;
 use GuiBranco\PocMvc\App\Controllers\UsersApiController;
 use GuiBranco\PocMvc\App\Controllers\UsersController;
-use GuiBranco\PocMvc\Src\Application;
 use GuiBranco\PocMvc\Src\Container\DIContainer;
+use GuiBranco\PocMvc\Src\Core\Application;
 use GuiBranco\PocMvc\Src\Router\Router;
 
 class Registration
@@ -26,7 +26,7 @@ class Registration
 
     public function addServices(): void
     {
-        $viewsPath = __DIR__ . '/views';
+        $viewsPath = __DIR__ . '/../views';
         $this->container->set(AboutController::class, fn($c) => new AboutController($viewsPath));
         $this->container->set(AuthController::class, fn($c) => new AuthController($viewsPath));
         $this->container->set(ContactController::class, fn($c) => new ContactController($viewsPath));

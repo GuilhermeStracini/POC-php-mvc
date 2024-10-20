@@ -16,16 +16,11 @@ class Router
         $this->baseDir = $baseDir;
     }
 
-    public function add(string $method, string $path, callable $handler): void
-    {
-        $this->routes[] = [
-            'method' => strtoupper($method),
-            'path' => rtrim($path, '/'),
-            'handler' => $handler,
-        ];
-    }
-
-    private static function getApiMethodVerbsAndNames()
+    /**
+     * Return a list of pre-defined method names for a RESTful API controller.
+     * @return string[][]
+     */
+    private static function getApiMethodVerbsAndNames(): array
     {
         $id = '/{id}';
         return [
@@ -42,6 +37,30 @@ class Router
         ];
     }
 
+
+    /**
+     * Add a new route.
+     *
+     * @param string $method
+     * @param string $path
+     * @param callable $handler
+     * @return void
+     */
+    public function add(string $method, string $path, callable $handler): void
+    {
+        $this->routes[] = [
+            'method' => strtoupper($method),
+            'path' => rtrim($path, '/'),
+            'handler' => $handler,
+        ];
+    }
+    
+    /**
+     * Register a controller as an API controller.
+     * @param mixed $controller
+     * @param string $prefix
+     * @return void
+     */
     public function registerApiController($controller, string $prefix = '/api/v1'): void
     {
         $controllerName = (new \ReflectionClass($controller))->getShortName();
@@ -80,11 +99,12 @@ class Router
      * @return mixed
      * @throws Exception
      */
-    public function dispatch(string $method, string $uri)
+    public function dispatch(string $method, string $uri): mixed
     {
         if ($this->isStaticFile($uri)) {
-            return $this->serveStaticFile($uri);
+            $this->serveStaticFile($uri);
         }
+        
         $method = strtoupper($method);
 
         $uriWithoutSlash = rtrim($uri, '/');
@@ -135,7 +155,13 @@ class Router
         return false;
     }
 
-    protected function isStaticFile($uri)
+    /**
+     * Check if the requested URI is a static file.
+     *
+     * @param string $uri
+     * @return bool
+     */
+    protected function isStaticFile($uri): bool
     {
         $filePath = $this->baseDir . $uri;
 
@@ -146,7 +172,13 @@ class Router
         return false;
     }
 
-    protected function serveStaticFile($filePath)
+    /**
+     * Serve a static file.
+     *
+     * @param string $filePath
+     * @return void
+     */
+    protected function serveStaticFile($filePath): never
     {
         $mimeType = mime_content_type($filePath);
         header('Content-Type: ' . $mimeType);
