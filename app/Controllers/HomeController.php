@@ -26,4 +26,10 @@ class HomeController extends BaseController
             'title' => 'Sandbox'
         ]);
     }
+
+    public function sections(){
+        return $this->view('sections', [
+            'title' => 'Sections'
+        ]);
+    }
 }

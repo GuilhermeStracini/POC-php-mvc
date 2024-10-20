@@ -10,6 +10,9 @@ class BaseController
 
     protected array $data = [];
 
+    protected $sections = [];
+    protected $content = '';
+
     public function __construct(string $viewsPath, string|null $layoutPath = null)
     {
         $viewsPath = rtrim($viewsPath, '/');
@@ -129,5 +132,24 @@ class BaseController
     {
         header('Content-Type: application/json');
         echo json_encode($data);
+    }
+
+    protected function startSection($name)
+    {
+        ob_start();
+        $this->sections[$name] = '';
+    }
+
+    protected function endSection()
+    {
+        $lastSectionName = array_key_last($this->sections);
+        if ($lastSectionName !== null) {
+            $this->sections[$lastSectionName] = ob_get_clean();
+        }
+    }
+
+    protected function renderSection($name)
+    {
+        return $this->sections[$name] ?? '';
     }
 }

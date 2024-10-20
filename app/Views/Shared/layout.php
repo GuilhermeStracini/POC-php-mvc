@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Custom Styles (if needed) -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
 
@@ -33,10 +33,16 @@
                     <a class="nav-link" href="/docs">API docs</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/sandbox">API sandbox</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/sections">Sections</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users">Users</a>
@@ -69,7 +75,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
 <!-- Custom Scripts (if needed) -->
-<script src="/assets/js/scripts.js"></script>
+<script src="/assets/scripts.js"></script>
+
+<?= $this->renderSection('scripts') ?>
 
 </body>
 </html>

@@ -9,13 +9,13 @@ class UsersApiController extends ApiBaseController
 {
     public function index()
     {
-        $users = UserModel::all(); // Assume User::all() fetches all users
+        $users = array_values(UserModel::all());
         $this->jsonResponse($users);
     }
 
     public function show($params)
     {
-        $user = UserModel::find($params['id']); // Assume User::find() fetches a user by ID
+        $user = UserModel::find($params['id']);
         if ($user) {
             $this->jsonResponse($user);
         } else {
@@ -37,18 +37,18 @@ class UsersApiController extends ApiBaseController
         $data = json_decode(file_get_contents('php://input'), true);
         $user = UserModel::find($params['id']);
         if ($user) {
-            UserModel::update($params['id'], $data); // Assume update updates the user data
+            UserModel::update($params['id'], $data);
             $this->jsonResponse($user);
         } else {
             $this->jsonResponse(['message' => 'User not found'], 404);
         }
     }
 
-    public function delete($params)
+    public function destroy(array $params)
     {
         $user = UserModel::find($params['id']);
         if ($user) {
-            UserModel::delete($params['id']); // Assume delete removes the user
+            UserModel::delete($params['id']);
             $this->jsonResponse(['message' => 'User deleted']);
         } else {
             $this->jsonResponse(['message' => 'User not found'], 404);

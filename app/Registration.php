@@ -41,6 +41,7 @@ class Registration
         $this->router->add('GET', '/', [$this->container->get(HomeController::class), 'index']);
         $this->router->add('GET', '/docs', [$this->container->get(HomeController::class), 'docs']);
         $this->router->add('GET', '/sandbox', [$this->container->get(HomeController::class), 'sandbox']);
+        $this->router->add('GET', '/sections', [$this->container->get(HomeController::class), 'sections']);
         $this->router->add('GET', '/about', [$this->container->get(AboutController::class), 'index']);
         $this->router->add('GET', '/contact', [$this->container->get(ContactController::class), 'showForm']);
         $this->router->add('POST', '/contact/submit', [$this->container->get(ContactController::class), 'handleFormSubmission']);

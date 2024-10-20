@@ -36,6 +36,7 @@
     </div>
 </div>
 
+<?php $this->startSection("scripts"); ?>
 <script>
     // Show/hide request body input based on selected method
     $('#apiMethod').on('change', function() {
@@ -67,3 +68,4 @@
         });
     });
 </script>
+<?php $this->endSection(); ?>

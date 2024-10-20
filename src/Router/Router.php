@@ -8,9 +8,12 @@ class Router
 
     private $container;
 
-    public function __construct($container)
+    protected $baseDir;
+
+    public function __construct($container, $baseDir = 'public/')
     {
         $this->container = $container;
+        $this->baseDir = $baseDir;
     }
 
     public function add(string $method, string $path, callable $handler): void
@@ -24,13 +27,18 @@ class Router
 
     private static function getApiMethodVerbsAndNames()
     {
+        $id = '/{id}';
         return [
-            'index' => 'GET',
-            'list' => 'GET',
-            'show' => 'GET',
-            'create' => 'POST',
-            'update' => 'PUT',
-            'delete' => 'DELETE',
+            'GETALL' => ['verb' => 'GET', 'parameter' => ''],
+            'GET' => ['verb' => 'GET', 'parameter' => $id],
+            'POST' => ['verb' => 'POST', 'parameter' => ''],
+            'PUT' => ['verb' => 'PUT', 'parameter' => $id],
+            'DELETE' => ['verb' => 'DELETE', 'parameter' => $id],
+            'INDEX' => ['verb' => 'GET', 'parameter' => ''],
+            'LIST' => ['verb' => 'GET', 'parameter' => ''],
+            'SHOW' => ['verb' => 'GET', 'parameter' => $id],
+            'CREATE' => ['verb' => 'POST', 'parameter' => ''],
+            'UPDATE' => ['verb' => 'PUT', 'parameter' => $id],
         ];
     }
 
@@ -40,23 +48,27 @@ class Router
         $basePath = strtolower(str_replace('ApiController', '', $controllerName));
 
         $methods = (new \ReflectionClass($controller))->getMethods();
+        $mapping = self::getApiMethodVerbsAndNames();
+
         foreach ($methods as $method) {
-            if ($method->class === $controller) {
-                $httpMethod = strtoupper($method->getName());
-                if (in_array($httpMethod, ['GET', 'POST', 'PUT', 'DELETE'])) {
-                    $this->routes[] = [
-                        'method' => $httpMethod,
-                        'path' => "{$prefix}/{$basePath}/" . ($httpMethod === 'GET' ? '{id}' : ''),
-                        'handler' => [$this->container->get($controller), $method->getName()],
-                    ];
-                } elseif (in_array(strtolower($method->getName()), array_keys(self::getApiMethodVerbsAndNames()))) {
-                    $this->routes[] = [
-                        'method' => self::getApiMethodVerbsAndNames()[strtolower($method->getName())],
-                        'path' => "{$prefix}/{$basePath}" . (strtolower($method->getName()) === 'show' ? '/{id}' : ''),
-                        'handler' => [$this->container->get($controller), $method->getName()],
-                    ];
-                }
+            if ($method->class !== $controller) {
+                continue;
             }
+            $classMethod = strtoupper($method->getName());
+
+            if (!array_key_exists($classMethod, $mapping)) {
+                continue;
+            }
+
+            $details = $mapping[$classMethod];
+            $verb = $details['verb'];
+            $path = "{$prefix}/{$basePath}" . ($details['parameter'] ? $details['parameter'] : "");
+
+            $this->routes[] = [
+                'method' => $verb,
+                'path' => $path,
+                'handler' => [$this->container->get($controller), $method->getName()],
+            ];
         }
     }
 
@@ -70,6 +82,9 @@ class Router
      */
     public function dispatch(string $method, string $uri)
     {
+        if ($this->isStaticFile($uri)) {
+            return $this->serveStaticFile($uri);
+        }
         $method = strtoupper($method);
 
         $uriWithoutSlash = rtrim($uri, '/');
@@ -93,7 +108,7 @@ class Router
                 return call_user_func($route['handler'], $params);
             }
         }
-
+        
         throw new \Exception("No matching route found for {$method} - {$uri}.");
     }
 
@@ -118,5 +133,25 @@ class Router
         }
 
         return false;
+    }
+
+    protected function isStaticFile($uri)
+    {
+        $filePath = $this->baseDir . $uri;
+
+        if (file_exists($filePath) && is_file($filePath)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function serveStaticFile($filePath)
+    {
+        $mimeType = mime_content_type($filePath);
+        header('Content-Type: ' . $mimeType);
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+        exit;
     }
 }
