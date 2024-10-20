@@ -1,7 +1,8 @@
 <?php
 
+use GuiBranco\PocMvc\Src\Container\DIContainer;
 use PHPUnit\Framework\TestCase;
-use GuiBranco\PocMvc\Src\Router;
+use GuiBranco\PocMvc\Src\Router\Router;
 
 class RouterTest extends TestCase
 {
@@ -9,7 +10,7 @@ class RouterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->router = new Router();
+        $this->router = new Router(new DIContainer());
     }
 
     public function testAddRoute(): void

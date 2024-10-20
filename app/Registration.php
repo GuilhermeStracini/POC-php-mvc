@@ -6,6 +6,7 @@ use GuiBranco\PocMvc\App\Controllers\AboutController;
 use GuiBranco\PocMvc\App\Controllers\ApiController;
 use GuiBranco\PocMvc\App\Controllers\ContactController;
 use GuiBranco\PocMvc\App\Controllers\HomeController;
+use GuiBranco\PocMvc\App\Controllers\UsersApiController;
 use GuiBranco\PocMvc\App\Controllers\UsersController;
 use GuiBranco\PocMvc\Src\Application;
 use GuiBranco\PocMvc\Src\Container\DIContainer;
@@ -31,19 +32,26 @@ class Registration
         $this->container->set(UsersController::class, fn($c) => new UsersController($viewsPath));
 
         $this->container->set(ApiController::class, fn($c) => new ApiController());
+        $this->container->set(UsersApiController::class, fn($c) => new UsersApiController());
     }
 
     public function registerRoutes(): void
     {
         // SSR (HTML)
         $this->router->add('GET', '/', [$this->container->get(HomeController::class), 'index']);
+        $this->router->add('GET', '/docs', [$this->container->get(HomeController::class), 'docs']);
+        $this->router->add('GET', '/sandbox', [$this->container->get(HomeController::class), 'sandbox']);
         $this->router->add('GET', '/about', [$this->container->get(AboutController::class), 'index']);
-        $this->router->add('GET', '/contact', [$this->container->get(ContactController::class), 'index']);
-        $this->router->add('POST', '/submit', [$this->container->get(ContactController::class), 'process']);
+        $this->router->add('GET', '/contact', [$this->container->get(ContactController::class), 'showForm']);
+        $this->router->add('POST', '/contact/submit', [$this->container->get(ContactController::class), 'handleFormSubmission']);
         $this->router->add('GET', '/users', [$this->container->get(UsersController::class), 'index']);
         $this->router->add('GET', '/users/{id}', [$this->container->get(UsersController::class), 'show']);
 
         // API (JSON)
         $this->router->add('GET', '/api/v1', [$this->container->get(id: ApiController::class), 'index']);
+    }
+
+    public function registerApiControllers(): void {
+        $this->router->registerApiController( UsersApiController::class);
     }
 }

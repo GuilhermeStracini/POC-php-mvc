@@ -9,8 +9,21 @@ class HomeController extends BaseController
     public function index()
     {
         return $this->view('index', [
-            'title' => 'Home Page',
-            'message' => 'This is a simple home page loaded via the BaseController.'
+            'title' => 'Home Page'
+        ]);
+    }
+
+    public function docs()
+    {
+        return $this->view('docs', [
+            'title' => 'Documentation'
+        ]);
+    }
+
+    public function sandbox()
+    {
+        return $this->view('sandbox', [
+            'title' => 'Sandbox'
         ]);
     }
 }
