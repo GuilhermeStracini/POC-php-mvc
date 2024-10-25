@@ -132,7 +132,7 @@ The project follows a clear structure that separates concerns into Controllers, 
 │           RouterTest.php               # Unit test for Router
 │           
 ├───vendor                               # Composer dependencies
-│──composer.json                         # Composer configuration file
+├──composer.json                         # Composer configuration file
 └──README.md                             # Project documentation
 
 ```
