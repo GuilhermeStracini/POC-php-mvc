@@ -178,7 +178,9 @@ The example below is a simple **HomeController** that renders a view:
 
 namespace GuiBranco\PocMvc\App\Controllers;
 
-class HomeController
+use GuiBranco\PocMvc\Src\Controller\BaseController;
+
+class HomeController extends BaseController
 {
     public function index()
     {
