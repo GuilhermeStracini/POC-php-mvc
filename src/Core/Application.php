@@ -2,6 +2,7 @@
 
 namespace GuiBranco\PocMvc\Src\Core;
 
+use GuiBranco\PocMvc\Src\Core\HttpException;
 use GuiBranco\PocMvc\Src\Container\DIContainer;
 use GuiBranco\PocMvc\Src\Router\Router;
 
