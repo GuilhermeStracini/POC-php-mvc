@@ -2,6 +2,7 @@
 
 namespace GuiBranco\PocMvc\Src\Core;
 
+use GuiBranco\PocMvc\Src\Core\HttpException;
 use GuiBranco\PocMvc\Src\Container\DIContainer;
 use GuiBranco\PocMvc\Src\Router\Router;
 
@@ -71,9 +72,23 @@ class Application
         try {
             $response = $this->router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
             echo $response;
+        } catch (HttpException $e) {
+            http_response_code($e->getCode());
+            echo $e->getMessage();
         } catch (\Exception $e) {
-            http_response_code(404);
-            echo '404 Not Found';
+            http_response_code(500);
+            
+            if (getenv('APP_ENV') === 'production') {
+                echo '500 Internal Server Error';
+            } else {
+                echo sprintf(
+                    "Error: %s\nFile: %s\nLine: %d\nTrace: %s",
+                    $e->getMessage(),
+                    $e->getFile(),
+                    $e->getLine(),
+                    $e->getTraceAsString()
+                );
+            }
         }
     }
 }
