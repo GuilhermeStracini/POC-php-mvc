@@ -2,6 +2,8 @@
 
 namespace GuiBranco\PocMvc\Src\Router;
 
+use Guibranco\PocMvc\Src\Core;
+
 class Router
 {
     private $routes = [];
@@ -128,8 +130,8 @@ class Router
                 return call_user_func($route['handler'], $params);
             }
         }
-        
-        throw new \Exception("No matching route found for {$method} - {$uri}.");
+
+        throw new HttpException("No matching route found for {$method} - {$uri}.", 404);
     }
 
     /**
