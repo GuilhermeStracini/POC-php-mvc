@@ -26,7 +26,7 @@ class Registration
 
     public function addServices(): void
     {
-        $viewsPath = __DIR__ . '/../views';
+        $viewsPath = __DIR__ . '/../Views';
         $this->container->set(AboutController::class, fn($c) => new AboutController($viewsPath));
         $this->container->set(AuthController::class, fn($c) => new AuthController($viewsPath));
         $this->container->set(ContactController::class, fn($c) => new ContactController($viewsPath));
