@@ -1,21 +1,26 @@
 FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
-    zlib1g-dev \
     libzip-dev \
-    unzip
-RUN docker-php-ext-install zip pdo pdo_mysql
-RUN composer self-update
-RUN a2enmod rewrite
-
-RUN curl -sS https://getcomposer.org/installer | php -- \
-    --install-dir=/usr/bin \--filename=composer && chmod +x /usr/bin/composer 
+    unzip \
+    zlib1g-dev && rm -rf /var/lib/apt/lists/* && \
+    docker-php-ext-install zip pdo pdo_mysql && \
+    a2enmod rewrite && \
+    curl -sS https://getcomposer.org/installer | php -- \
+    --install-dir=/usr/bin \
+    --filename=composer && chmod +x /usr/bin/composer && \
+    composer self-update
 
 WORKDIR /var/www/html
 
-COPY . /var/www/html
+COPY ./app /var/www/html/app
+COPY ./public /var/www/html/public
+COPY ./src /var/www/html/src
+COPY .htaccess /var/www/html/
+COPY composer.json /var/www/html/composer.json
+COPY composer.lock /var/www/html/composer.lock
 
-RUN composer install
+RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
