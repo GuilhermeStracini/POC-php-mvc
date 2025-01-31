@@ -2,6 +2,7 @@
 
 namespace GuiBranco\PocMvc\Src\Controller;
 use GuiBranco\PocMvc\Src\Core\BundleManager;
+use Exception;
 
 class BaseController
 {
@@ -21,10 +22,10 @@ class BaseController
         $controllerName = str_replace("Controller", "", $this->getControllerName());
         $this->viewsPath = [
             "{$viewsPath}/{$controllerName}/",
-            "{$viewsPath}/shared/",
+            "{$viewsPath}/Shared/",
             "{$viewsPath}/"
         ];
-        $this->layoutPath = "{$viewsPath}/shared/";
+        $this->layoutPath = "{$viewsPath}/Shared/";
         if ($layoutPath) {
             $this->layoutPath = $layoutPath;
         }
@@ -46,10 +47,11 @@ class BaseController
      * @param string $template The view template file name (without extension).
      * @param array $data Data to be passed to the view.
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function view(string $viewName, array $data = [], ?string $layout = 'layout'): void
     {
+        $searchedPaths = [];
         $layout = $layout ? "{$this->layoutPath}{$layout}.php" : null;
         foreach ($this->viewsPath as $path) {
             $fullPath = $path . $viewName . '.php';
@@ -57,9 +59,11 @@ class BaseController
                 $this->render($fullPath, $data, $layout);
                 return;
             }
+
+            $searchedPaths[] = $fullPath;
         }
 
-        throw new \Exception("View not found: {$viewName}");
+        throw new Exception("View not found: {$viewName} (searched in: " . implode(', ', $searchedPaths) . ")");
     }
 
     /**

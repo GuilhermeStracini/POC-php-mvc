@@ -7,7 +7,6 @@ services:
       - .:/var/www/html
     expose:
       - "9000"
-
   nginx:
     image: nginx:alpine
     ports:

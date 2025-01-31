@@ -8,11 +8,11 @@ class BundleRegistration
     public static function registerBundles()
     {
         BundleManager::register('styles', [
-            '/public/css/style.css',
+            '/public/assets/style.css',
         ]);
 
         BundleManager::register('scripts', [
-            '/public/js/scritps.js'
+            '/public/assets/scripts.js'
         ]);
     }
 }

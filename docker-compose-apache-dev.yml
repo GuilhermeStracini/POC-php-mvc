@@ -1,0 +1,13 @@
+services:
+  php-apache:
+    build: 
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    restart: always
