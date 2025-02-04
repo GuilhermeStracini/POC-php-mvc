@@ -4,7 +4,7 @@
     <hr class="my-4">
 
     <h2>API Base URL</h2>
-    <p><code>https://your-domain.com/api/v1/users/</code></p>
+    <p><code>https://<?php echo $_SERVER['HTTP_HOST']; ?>/api/v1/users/</code></p>
 
     <h2>Endpoints</h2>
 
