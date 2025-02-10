@@ -1,3 +1,35 @@
+## PixeeBot Activity Dashboard
+
+<img alt="DashList" src="https://docs.pixee.ai/img/pixee_dashlist.png">
+
+👋 This dashboard summarizes my activity on the repository, including available improvement opportunities.
+
+## Recommendations
+_Last analysis: Feb 08 | Next scheduled analysis: Feb 15_
+
+**NOTE**: I've identified this repository's primary language as `PHP`. To fix code in this language, you must [connect a supported code scanning tool](https://docs.pixee.ai/code-scanning-tools/overview). Please upload your tool results to get fixes in this repository.
+
+### Open
+
+  ✅ Nice work, you're all caught up!
+
+### Available
+
+  ✅ Nothing yet, but I'm continuing to monitor your PRs.
+
+## Metrics
+**What would you like to see here?**  [Let us know!](https://tally.so/r/mYa4Y5)
+
+## Resources
+
+📚 **Quick links**
+[Pixee Docs](https://docs.pixee.ai/) | [Codemodder by Pixee](https://codemodder.io/)
+
+🧰 **Tools I work with**
+[SonarCloud](https://docs.pixee.ai/code-scanning-tools/sonar) | [SonarQube](https://docs.pixee.ai/code-scanning-tools/sonarqube) | [CodeQL](https://docs.pixee.ai/code-scanning-tools/codeql) | [Semgrep](https://docs.pixee.ai/code-scanning-tools/semgrep)
+
+🚀 **Pixee CLI**
+The power of my codemods in your local development environment. [Learn more](https://github.com/pixee/pixee-cli)
 # PoC PHP MVC Framework with Custom Router, IoC/DI Container (PSR-compliant)
 
 This project is a **Proof of Concept (PoC)** for a custom-built **PHP MVC framework** that adheres to several PHP-FIG standards, including PSR-1, PSR-2, PSR-4, and PSR-11. It demonstrates how to build a lightweight MVC structure with custom routing and dependency injection (IoC/DI) while following best practices for modern PHP development.
