@@ -31,6 +31,29 @@ jobs:
         uses: gittools/actions/gitversion/execute@v3
         with:
           useConfigFile: true
+      
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install dependencies
+        uses: "php-actions/composer@v6"
+        with:
+          php_extensions: sockets
+          dev: no
+          progress: yes
+          working_dir: "./Src/"
+
+      - name: Generate dist
+        run: |
+          cp app dist
+          cp public dist
+          cp public dist
+          cp src dist
+          cp vendor dist
+          cp .htaccess dist
 
       - name: Upload service
         uses: sebastianpopp/ftp-action@releases/v2
@@ -38,7 +61,7 @@ jobs:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "src"
+          localDir: "dist"
           remoteDir: "/"
           options: "--delete"
 
