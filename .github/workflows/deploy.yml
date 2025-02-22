@@ -50,7 +50,6 @@ jobs:
         run: |
           cp app dist
           cp public dist
-          cp public dist
           cp src dist
           cp vendor dist
           cp .htaccess dist
