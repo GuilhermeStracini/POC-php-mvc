@@ -5,12 +5,37 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-message:
-      prefix: "chore"
+    open-pull-requests-limit: 50
+    assignees: 
+      - "guibranco"
+    reviewers: 
+      - "guibranco"
+    labels:
+      - "composer"
+      - "php"
 
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 50
+    assignees: 
+      - "guibranco"
+    reviewers: 
+      - "guibranco"
+    labels:
+      - "docker"
+      - "dependencies"
+  
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "chore"
+      interval: weekly
+    open-pull-requests-limit: 50
+    assignees: 
+      - "guibranco"
+    reviewers: 
+      - "guibranco"
+    labels:
+      - "github-actions"
+      - "dependencies"
