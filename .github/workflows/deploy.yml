@@ -44,7 +44,6 @@ jobs:
           php_extensions: sockets
           dev: no
           progress: yes
-          working_dir: "./Src/"
 
       - name: Generate dist
         run: |
