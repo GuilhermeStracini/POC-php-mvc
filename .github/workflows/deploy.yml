@@ -47,10 +47,10 @@ jobs:
 
       - name: Generate dist
         run: |
-          cp app dist
-          cp public dist
-          cp src dist
-          cp vendor dist
+          cp -r app dist
+          cp -r public dist
+          cp -r src dist
+          cp -r vendor dist
           cp .htaccess dist
 
       - name: Upload service
