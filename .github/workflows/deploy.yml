@@ -39,7 +39,7 @@ jobs:
           cp -r src poc-php-mvc
           mv .htaccess-prod poc-php-mvc/.htaccess
           mv composer.json poc-php-mvc/composer.json
-          mv composer.lock poc-php-mvc/composer.lock          
+          mv composer.lock poc-php-mvc/composer.lock
       
       - name: Cache Composer dependencies
         uses: actions/cache@v4
