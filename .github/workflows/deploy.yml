@@ -31,6 +31,15 @@ jobs:
         uses: gittools/actions/gitversion/execute@v3
         with:
           useConfigFile: true
+
+      - name: Generate dist
+        run: |
+          cp -r app poc-php-mvc
+          cp -r public poc-php-mvc
+          cp -r src poc-php-mvc
+          mv .htaccess-prod poc-php-mvc/.htaccess
+          mv composer.json poc-php-mvc/composer.json
+          mv composer.lock poc-php-mvc/composer.lock
       
       - name: Cache Composer dependencies
         uses: actions/cache@v4
@@ -44,14 +53,7 @@ jobs:
           php_extensions: sockets
           dev: no
           progress: yes
-
-      - name: Generate dist
-        run: |
-          cp -r app dist
-          cp -r public dist
-          cp -r src dist
-          cp -r vendor dist
-          cp .htaccess dist
+          working_dir: "./poc-php-mvc/"
 
       - name: Upload service
         uses: sebastianpopp/ftp-action@releases/v2
@@ -59,7 +61,7 @@ jobs:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "dist"
+          localDir: "poc-php-mvc"
           remoteDir: "/"
           options: "--delete"
 
