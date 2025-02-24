@@ -104,7 +104,10 @@ class Router
     public function dispatch(string $method, string $uri): mixed
     {
         if (!empty($this->basePath) && strpos($uri, $this->basePath) === 0) {
-            $uri = substr($uri, strlen($this->basePath));
+            $basePathLength = strlen($this->basePath);
+            if (strlen($uri) === $basePathLength || $uri[$basePathLength] === '/') {
+                $uri = substr($uri, $basePathLength);
+            }
         }
 
         if ($this->isStaticFile($uri)) {
