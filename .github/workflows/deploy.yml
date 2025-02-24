@@ -34,7 +34,7 @@ jobs:
 
       - name: Generate dist
         run: |
-          mkdir poc-php-mvc
+          mkdir -p poc-php-mvc
           cp -r app poc-php-mvc/app
           cp -r public poc-php-mvc/public
           cp -r src poc-php-mvc/src
