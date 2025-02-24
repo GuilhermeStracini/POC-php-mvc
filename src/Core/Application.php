@@ -11,10 +11,10 @@ class Application
     protected Router $router;
     protected DIContainer $container;
 
-    public function __construct()
+    public function __construct(string $basePath = '', string $publicDirBasePath = 'public/')
     {
         $this->container = new DIContainer();
-        $this->router = new Router($this->container);
+        $this->router = new Router($this->container, $basePath, $publicDirBasePath);
     }
 
     /**
