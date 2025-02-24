@@ -7,15 +7,15 @@ use GuiBranco\PocMvc\Src\Core\HttpException;
 class Router
 {
     private $routes = [];
-
     private $container;
+    protected $basePath;
+    protected $publicDirBasePath;
 
-    protected $baseDir;
-
-    public function __construct($container, $baseDir = 'public/')
+    public function __construct($container, string $basePath = '', string $publicDirBasePath = 'public/')
     {
         $this->container = $container;
-        $this->baseDir = $baseDir;
+        $this->basePath = rtrim($basePath, '/');
+        $this->publicDirBasePath = rtrim($publicDirBasePath, '/');
     }
 
     /**
@@ -39,7 +39,6 @@ class Router
         ];
     }
 
-
     /**
      * Add a new route.
      *
@@ -50,13 +49,14 @@ class Router
      */
     public function add(string $method, string $path, callable $handler): void
     {
+        $path = rtrim($this->basePath . '/' . ltrim($path, '/'), '/');
         $this->routes[] = [
             'method' => strtoupper($method),
-            'path' => rtrim($path, '/'),
+            'path' => $path,
             'handler' => $handler,
         ];
     }
-    
+
     /**
      * Register a controller as an API controller.
      * @param mixed $controller
@@ -87,7 +87,7 @@ class Router
 
             $this->routes[] = [
                 'method' => $verb,
-                'path' => $path,
+                'path' => rtrim($this->basePath . '/' . ltrim($path, '/'), '/'),
                 'handler' => [$this->container->get($controller), $method->getName()],
             ];
         }
@@ -103,13 +103,19 @@ class Router
      */
     public function dispatch(string $method, string $uri): mixed
     {
+        if (!empty($this->basePath) && strpos($uri, $this->basePath) === 0) {
+            $basePathLength = strlen($this->basePath);
+            if (strlen($uri) === $basePathLength || $uri[$basePathLength] === '/') {
+                $uri = substr($uri, $basePathLength);
+            }
+        }
+
         if ($this->isStaticFile($uri)) {
             $this->serveStaticFile($uri);
         }
-        
-        $method = strtoupper($method);
 
-        $uriWithoutSlash = rtrim($uri, '/');
+        $method = strtoupper($method);
+        $uri = rtrim($uri, '/');
 
         if ($method === "GET" && $uri === $uriWithoutSlash) {
             header("Location: $uriWithoutSlash/", true, 301);
@@ -120,7 +126,7 @@ class Router
             $pattern = preg_replace('/\{(\w+)\}/', '([^/]+)', $route['path']);
             $regex = '#^' . $pattern . '/?$#';
 
-            if ($route['method'] === $method && preg_match($regex, $uriWithoutSlash, $matches)) {
+            if ($route['method'] === $method && preg_match($regex, $uri, $matches)) {
                 array_shift($matches);
                 $params = [];
                 preg_match_all('/\{(\w+)\}/', $route['path'], $paramNames);
@@ -143,6 +149,10 @@ class Router
      */
     public function hasRoute(string $method, string $uri): bool
     {
+        if (!empty($this->basePath) && strpos($uri, $this->basePath) === 0) {
+            $uri = substr($uri, strlen($this->basePath));
+        }
+
         $uri = rtrim($uri, '/');
 
         foreach ($this->routes as $route) {
@@ -165,13 +175,9 @@ class Router
      */
     protected function isStaticFile($uri): bool
     {
-        $filePath = $this->baseDir . $uri;
+        $filePath = $this->publicDirBasePath . '/' . ltrim($uri, '/');
 
-        if (file_exists($filePath) && is_file($filePath)) {
-            return true;
-        }
-
-        return false;
+        return file_exists($filePath) && is_file($filePath);
     }
 
     /**
@@ -182,10 +188,17 @@ class Router
      */
     protected function serveStaticFile($filePath): never
     {
-        $mimeType = mime_content_type($filePath);
+        $fullPath = $this->publicDirBasePath . '/' . ltrim($filePath, '/');
+
+        if (!file_exists($fullPath) || !is_file($fullPath)) {
+            http_response_code(404);
+            exit('File not found');
+        }
+
+        $mimeType = mime_content_type($fullPath);
         header('Content-Type: ' . $mimeType);
-        header('Content-Length: ' . filesize($filePath));
-        readfile($filePath);
+        header('Content-Length: ' . filesize($fullPath));
+        readfile($fullPath);
         exit;
     }
 }
