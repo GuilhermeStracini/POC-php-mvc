@@ -14,7 +14,7 @@ class Application
     public function __construct()
     {
         $this->container = new DIContainer();
-        $this->router = new Router($this->container);
+        $this->router = new Router($this->container, 'poc-php-mvc/');
     }
 
     /**
