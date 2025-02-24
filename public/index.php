@@ -5,8 +5,8 @@ use GuiBranco\PocMvc\Src\Core\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new Application();
-$registration = new Registration($app, 'poc-php-mvc/');
+$app = new Application('poc-php-mvc/');
+$registration = new Registration($app);
 $registration->addServices();
 $registration->registerRoutes();
 $registration->registerApiControllers();
