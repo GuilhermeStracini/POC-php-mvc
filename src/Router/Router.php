@@ -2,7 +2,7 @@
 
 namespace GuiBranco\PocMvc\Src\Router;
 
-use Guibranco\PocMvc\Src\Core;
+use GuiBranco\PocMvc\Src\Core\HttpException;
 
 class Router
 {
