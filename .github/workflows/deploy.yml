@@ -34,9 +34,10 @@ jobs:
 
       - name: Generate dist
         run: |
-          cp -r app poc-php-mvc
-          cp -r public poc-php-mvc
-          cp -r src poc-php-mvc
+          mkdir poc-php-mvc
+          cp -r app poc-php-mvc/app
+          cp -r public poc-php-mvc/public
+          cp -r src poc-php-mvc/src
           mv .htaccess-prod poc-php-mvc/.htaccess
           mv composer.json poc-php-mvc/composer.json
           mv composer.lock poc-php-mvc/composer.lock
