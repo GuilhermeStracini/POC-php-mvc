@@ -49,7 +49,6 @@ class Router
      */
     public function add(string $method, string $path, callable $handler): void
     {
-        $path = rtrim($this->basePath . '/' . ltrim($path, '/'), '/');
         $this->routes[] = [
             'method' => strtoupper($method),
             'path' => $path,
