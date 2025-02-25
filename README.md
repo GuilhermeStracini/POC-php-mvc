@@ -43,7 +43,7 @@ The project complies with the following PSRs:
 - **[PSR-2](https://www.php-fig.org/psr/psr-2/)**: Coding style guide, which helps maintain a consistent structure across files. (**deprecated - view PSR-12**)
 - **[PSR-4](https://www.php-fig.org/psr/psr-4/)**: Autoloading standard using Composer, mapping namespaces to file directories.
 - **[PSR-11](https://www.php-fig.org/psr/psr-11/)**: Container interface for dependency injection, enabling a service-based architecture.
-  **[PSR-12](https://www.php-fig.org/psr/psr-12/)**: Coding style guide, which helps maintain a consistent structure across files.
+- **[PSR-12](https://www.php-fig.org/psr/psr-12/)**: Coding style guide, which helps maintain a consistent structure across files.
 
 ## Directory Structure
 
