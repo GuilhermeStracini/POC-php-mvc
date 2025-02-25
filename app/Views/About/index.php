@@ -59,7 +59,7 @@
     <div class="row mt-5">
         <div class="col-md-12 text-center">
             <h4>Get in Touch</h4>
-            <p>If you'd like to learn more about us or how we can help, <a href="/contact">reach out to us</a> today!</p>
+            <p>If you'd like to learn more about us or how we can help, <a href="contact">reach out to us</a> today!</p>
         </div>
     </div>
 </div>

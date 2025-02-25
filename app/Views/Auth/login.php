@@ -19,7 +19,7 @@
         </div>
     <?php endif; ?>
 
-    <form method="post" action="/login">
+    <form method="post" action="login">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"><br><br>
 

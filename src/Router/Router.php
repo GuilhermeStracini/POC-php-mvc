@@ -114,7 +114,7 @@ class Router
         }
 
         $method = strtoupper($method);
-        $uri = rtrim($uri, '/');
+        $uriWithoutSlash = rtrim($uri, '/');
 
         if ($method === "GET" && $uri === $uriWithoutSlash) {
             header("Location: $uriWithoutSlash/", true, 301);
