@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13cf27e1bca6ade812f67780fe65bcad",
+    "content-hash": "8d1d48354450a22a58a216ec03a04271",
     "packages": [
         {
             "name": "guibranco/pancake",
-            "version": "v1.2.15",
+            "version": "v1.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guibranco/pancake.git",
-                "reference": "05bd711a2b17ff2bf62e24e9c3a84694462acad7"
+                "reference": "05734cb36a7d6790897f5379b8227de1666dd37b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guibranco/pancake/zipball/05bd711a2b17ff2bf62e24e9c3a84694462acad7",
-                "reference": "05bd711a2b17ff2bf62e24e9c3a84694462acad7",
+                "url": "https://api.github.com/repos/guibranco/pancake/zipball/05734cb36a7d6790897f5379b8227de1666dd37b",
+                "reference": "05734cb36a7d6790897f5379b8227de1666dd37b",
                 "shasum": ""
             },
             "require-dev": {
@@ -42,9 +42,9 @@
             "description": "The Pancake project, a toolkit for PHP projects",
             "support": {
                 "issues": "https://github.com/guibranco/pancake/issues",
-                "source": "https://github.com/guibranco/pancake/tree/v1.2.15"
+                "source": "https://github.com/guibranco/pancake/tree/v1.2.17"
             },
-            "time": "2025-02-21T20:21:40+00:00"
+            "time": "2025-02-24T06:04:52+00:00"
         },
         {
             "name": "psr/container",
@@ -1792,10 +1792,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "plugin-api-version": "2.3.0"
 }
