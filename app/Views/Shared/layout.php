@@ -29,21 +29,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="./">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about/">About</a>
+                        <a class="nav-link" href="about/">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact/">Contact</a>
+                        <a class="nav-link" href="contact/">Contact</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkApi" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             API
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkApi">
-                            <li><a class="dropdown-item" href="/docs/">Docs</a></li>
-                            <li><a class="dropdown-item" href="/sandbox/">Sandbox</a></li>
+                            <li><a class="dropdown-item" href="docs/">Docs</a></li>
+                            <li><a class="dropdown-item" href="sandbox/">Sandbox</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -51,8 +51,8 @@
                             Features Demos
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkFeatures">
-                            <li><a class="dropdown-item" href="/sections/">Sections</a></li>
-                            <li><a class="dropdown-item" href="/users/">User management</a></li>
+                            <li><a class="dropdown-item" href="sections/">Sections</a></li>
+                            <li><a class="dropdown-item" href="users/">User management</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -71,7 +71,7 @@
     <!-- Footer -->
     <footer class="bg-light text-center py-4">
         <div class="container">
-            <p>&copy; <?= date('Y') ?> PoC PHP MVC. All Rights Reserved.</p>
+            <p>&copy; <?= date('Y') ?> PoC PHP MVC. All Rights Reserved. <a class="nav-link" href="https://github.com/guilhermestracini/poc-php-mvc" target="_blank">GitHub</a></p>
         </div>
     </footer>
 
