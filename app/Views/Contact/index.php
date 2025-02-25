@@ -21,7 +21,7 @@
     <?php endif; ?>
 
     <!-- Contact Form -->
-    <form action="/contact/submit" method="POST">
+    <form action="contact/submit" method="POST">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" id="name"
