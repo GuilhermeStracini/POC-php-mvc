@@ -11,10 +11,13 @@ class Application
     protected Router $router;
     protected DIContainer $container;
 
+    protected string $basePath;
+
     public function __construct(string $basePath = '', string $publicDirBasePath = 'public/')
     {
         $this->container = new DIContainer();
         $this->router = new Router($this->container, $basePath, $publicDirBasePath);
+        $this->basePath = $basePath;
     }
 
     /**
@@ -60,6 +63,16 @@ class Application
     public function addRoute(string $method, string $path, callable $handler): void
     {
         $this->router->add($method, $path, $handler);
+    }
+
+    /**
+     * Get the base path for this instance.
+     *
+     * @return string
+     */
+    public function getBasePath(): string
+    {
+        return $this->basePath;
     }
 
     /**
