@@ -5,8 +5,8 @@
             <p class="lead">This is a lightweight MVC framework built with PHP following PSR standards.</p>
             <hr class="my-4">
             <p>Explore the features, learn more about us, or manage users using the sections below.</p>
-            <a href="about" class="btn btn-primary btn-lg m-2">About Us</a>
-            <a href="users" class="btn btn-secondary btn-lg m-2">Manage Users</a>
+            <a href="/poc-php-mvc/about" class="btn btn-primary btn-lg m-2">About Us</a>
+            <a href="/poc-php-mvc/users" class="btn btn-secondary btn-lg m-2">Manage Users</a>
         </div>
     </div>
 
