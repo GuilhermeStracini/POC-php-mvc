@@ -119,7 +119,8 @@ class Router
         $uriWithoutSlash = rtrim($uri, '/');
 
         if ($method === "GET" && $uri === $uriWithoutSlash) {
-            header("Location: $uriWithoutSlash/", true, 301);
+            $prefix = empty($this->basePath) ? "" : $this->basePath . "/";
+            header("Location: {$prefix}{$uriWithoutSlash}/", true, 301);
             exit();
         }
 
