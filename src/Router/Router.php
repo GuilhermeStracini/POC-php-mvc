@@ -102,6 +102,8 @@ class Router
      */
     public function dispatch(string $method, string $uri): mixed
     {
+        $uri = parse_url($uri, PHP_URL_PATH);
+
         if (!empty($this->basePath) && strpos($uri, $this->basePath) === 0) {
             $basePathLength = strlen($this->basePath);
             if (strlen($uri) === $basePathLength || $uri[$basePathLength] === '/') {
