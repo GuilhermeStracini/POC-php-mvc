@@ -37,4 +37,14 @@ class RouterTest extends TestCase
         $this->expectException(\Exception::class);
         $this->router->dispatch('GET', '/non-existent');
     }
+
+    public function testRouteWithQueryString(): void
+    {
+        $this->router->add('GET', '/about', function () {
+            return 'About Us';
+        });
+
+        $response = $this->router->dispatch('GET', '/about?test=12345&qs=qs');
+        $this->assertEquals('About Us', $response);
+    }
 }
