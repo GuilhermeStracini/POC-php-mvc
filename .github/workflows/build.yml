@@ -37,8 +37,8 @@ jobs:
           php_version: 8.3
           php_extensions: xdebug
           coverage_cobertura: coverage.xml
-          configuration: phpunit.xml
+          configuration: tests/phpunit.xml
           test_suffix: Test.php
-          args: --coverage-filter tests
+          args: --coverage-filter tests --cache-result-file=build/phpunit-cache/.phpunit.result.cache
         env:
           XDEBUG_MODE: coverage
