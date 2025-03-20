@@ -6,10 +6,10 @@
 >
     <testsuites>
         <testsuite name="Unit Tests">
-            <directory>tests/Unit</directory>
+            <directory>./Unit</directory>
         </testsuite>
         <testsuite name="Integration Tests">
-            <directory>tests/Integration</directory>
+            <directory>./Integration</directory>
         </testsuite>
     </testsuites>
 </phpunit>
