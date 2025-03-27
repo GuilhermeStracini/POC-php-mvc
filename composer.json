@@ -15,6 +15,11 @@
             "GuiBranco\\PocMvc\\Src\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "GuiBranco\\PocMvc\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Guilherme Branco Stracini",
