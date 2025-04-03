@@ -5,12 +5,13 @@ on:
         branches:
             - main
     pull_request:
-        types: [opened, synchronize, reopened]
+    workflow_dispatch:
 
 jobs:
     DeepSource:
         name: Deep Source Coverage report
         runs-on: ubuntu-latest
+
         steps:
             - uses: actions/checkout@v4
               with:
@@ -18,11 +19,6 @@ jobs:
 
             - name: Install DeepSource scanner
               run: curl https://deepsource.io/cli | sh
-            
-            - name: Setup PHP runtime
-              uses: shivammathur/setup-php@v2
-              with:
-                coverage: "none"
 
             - name: Cache Composer dependencies
               uses: actions/cache@v4
@@ -33,12 +29,15 @@ jobs:
             - name: Install dependencies
               uses: php-actions/composer@v6
 
+            - name: Docker compose up
+              run: docker compose up -d && sleep 10
+
             - name: PHPUnit Tests
               uses: php-actions/phpunit@v4
               with:
                   version: 11
                   php_version: 8.3
-                  php_extensions: xdebug
+                  php_extensions: xdebug shmop curl pdo pdo_mysql
                   coverage_cobertura: coverage.xml
                   bootstrap: vendor/autoload.php
                   configuration: tests/phpunit.xml
