@@ -2,4 +2,6 @@
 
 namespace GuiBranco\PocMvc\Src\Core;
 
-class HttpException extends \Exception { }
+class HttpException extends \Exception
+{
+}

@@ -90,7 +90,7 @@ class Application
             echo $e->getMessage();
         } catch (\Exception $e) {
             http_response_code(500);
-            
+
             if (getenv('APP_ENV') === 'production') {
                 echo '500 Internal Server Error';
             } else {

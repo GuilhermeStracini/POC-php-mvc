@@ -57,7 +57,7 @@ class DIContainer implements ContainerInterface
 
         $constructor = $reflection->getConstructor();
         if (is_null($constructor)) {
-            return new $class;
+            return new $class();
         }
 
         $params = [];

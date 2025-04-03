@@ -1,4 +1,5 @@
 <?php
+
 use GuiBranco\PocMvc\App\Config\BundleRegistration;
 use GuiBranco\PocMvc\App\Config\Registration;
 use GuiBranco\PocMvc\Src\Core\Application;

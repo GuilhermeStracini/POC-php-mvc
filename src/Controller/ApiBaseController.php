@@ -1,4 +1,5 @@
 <?php
+
 namespace GuiBranco\PocMvc\Src\Controller;
 
 use GuiBranco\PocMvc\Src\Controller\BaseController;
