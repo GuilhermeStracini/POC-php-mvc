@@ -14,7 +14,7 @@ class DIContainerTest extends TestCase
 
     public function testAddService(): void
     {
-        $this->container->set('config', function() {
+        $this->container->set('config', function () {
             return ['debug' => true];
         });
 
@@ -23,7 +23,7 @@ class DIContainerTest extends TestCase
 
     public function testGetService(): void
     {
-        $this->container->set('db', function() {
+        $this->container->set('db', function () {
             return new stdClass();
         });
 

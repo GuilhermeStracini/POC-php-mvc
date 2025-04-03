@@ -1,6 +1,7 @@
 <?php
 
 namespace GuiBranco\PocMvc\Src\Controller;
+
 use GuiBranco\PocMvc\Src\Core\BundleManager;
 use Exception;
 
