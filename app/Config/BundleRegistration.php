@@ -1,6 +1,7 @@
 <?php
 
 namespace GuiBranco\PocMvc\App\Config;
+
 use GuiBranco\PocMvc\Src\Core\BundleManager;
 
 class BundleRegistration
