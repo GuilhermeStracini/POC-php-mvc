@@ -10,16 +10,16 @@ class FullAppTest extends TestCase
     private DIContainer $container;
 
     private Router $router;
-    
+
     protected function setUp(): void
     {
         $this->container = new DIContainer();
-        $this->container->set(HomeController::class, function() {
+        $this->container->set(HomeController::class, function () {
             return new HomeController('');
         });
 
         $this->router = new Router($this->container);
-        $this->router->add('GET', '/home', function() {
+        $this->router->add('GET', '/home', function () {
             $controller = $this->container->get(HomeController::class);
             return $controller->index();
         });

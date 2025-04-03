@@ -18,7 +18,7 @@ class ContactModel
 
     public function isValid(): bool
     {
-        return !empty($this->name) &&filter_var($this->email, FILTER_VALIDATE_EMAIL) && !empty($this->message);
+        return !empty($this->name) && filter_var($this->email, FILTER_VALIDATE_EMAIL) && !empty($this->message);
     }
 
     public function getErrors(): array

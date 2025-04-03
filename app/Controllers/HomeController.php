@@ -27,7 +27,8 @@ class HomeController extends BaseController
         ]);
     }
 
-    public function sections(){
+    public function sections()
+    {
         return $this->view('sections', [
             'title' => 'Sections'
         ]);

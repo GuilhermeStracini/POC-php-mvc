@@ -27,14 +27,14 @@ class Registration
     public function addServices(): void
     {
         $viewsPath = __DIR__ . '/../Views';
-        $this->container->set(AboutController::class, fn($c) => new AboutController($viewsPath));
-        $this->container->set(AuthController::class, fn($c) => new AuthController($viewsPath));
-        $this->container->set(ContactController::class, fn($c) => new ContactController($viewsPath));
-        $this->container->set(HomeController::class, fn($c) => new HomeController($viewsPath));
-        $this->container->set(UsersController::class, fn($c) => new UsersController($viewsPath));
+        $this->container->set(AboutController::class, fn ($c) => new AboutController($viewsPath));
+        $this->container->set(AuthController::class, fn ($c) => new AuthController($viewsPath));
+        $this->container->set(ContactController::class, fn ($c) => new ContactController($viewsPath));
+        $this->container->set(HomeController::class, fn ($c) => new HomeController($viewsPath));
+        $this->container->set(UsersController::class, fn ($c) => new UsersController($viewsPath));
 
-        $this->container->set(ApiController::class, fn($c) => new ApiController());
-        $this->container->set(UsersApiController::class, fn($c) => new UsersApiController());
+        $this->container->set(ApiController::class, fn ($c) => new ApiController());
+        $this->container->set(UsersApiController::class, fn ($c) => new UsersApiController());
     }
 
     public function registerRoutes(): void
