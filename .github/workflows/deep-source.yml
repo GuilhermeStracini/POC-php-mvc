@@ -42,7 +42,7 @@ jobs:
                   bootstrap: vendor/autoload.php
                   configuration: tests/phpunit.xml
                   test_suffix: Test.php
-                  args: --coverage-filter src tests
+                  args: --coverage-filter tests
               env:
                   XDEBUG_MODE: coverage
 
