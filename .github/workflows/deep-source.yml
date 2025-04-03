@@ -27,22 +27,22 @@ jobs:
                   key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
             - name: Install dependencies
-              uses: php-actions/composer@v6
-
-            - name: Docker compose up
-              run: docker compose up -d && sleep 10
+              uses: "php-actions/composer@v6"
+              with:
+               dev: yes
+               progress: yes
 
             - name: PHPUnit Tests
               uses: php-actions/phpunit@v4
               with:
                   version: 11
                   php_version: 8.3
-                  php_extensions: xdebug shmop curl pdo pdo_mysql
+                  php_extensions: xdebug
                   coverage_cobertura: coverage.xml
                   bootstrap: vendor/autoload.php
                   configuration: tests/phpunit.xml
                   test_suffix: Test.php
-                  args: --coverage-filter src tests
+                  args: --coverage-filter app src tests
               env:
                   XDEBUG_MODE: coverage
 
