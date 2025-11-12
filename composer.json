@@ -3,7 +3,7 @@
     "description": "A PHP PoC (Proof of Concept) of a MVC Framework with custom router, IoC/DI container (PSR-compliant)",
     "type": "project",
     "require": {
-        "guibranco/pancake": "^1.3.85",
+        "guibranco/pancake": "^1.3.87",
         "psr/container": "^2.0"
     },
     "require-dev": {
