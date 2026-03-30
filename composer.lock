@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53992f198e5777b87ec54e96e0fd69fd",
+    "content-hash": "c0239e94a6ce9df93cad97703c60f1f6",
     "packages": [
         {
             "name": "guibranco/pancake",
