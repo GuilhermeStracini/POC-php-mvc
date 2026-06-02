@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "guibranco/pancake",
-            "version": "v1.7.15",
+            "version": "v1.7.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guibranco/pancake.git",
-                "reference": "4c845b3095e6904eb42999c4c6fff1f85784a152"
+                "reference": "11b0e7a81faf1a279ebae72b40e218c209c954df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guibranco/pancake/zipball/4c845b3095e6904eb42999c4c6fff1f85784a152",
-                "reference": "4c845b3095e6904eb42999c4c6fff1f85784a152",
+                "url": "https://api.github.com/repos/guibranco/pancake/zipball/11b0e7a81faf1a279ebae72b40e218c209c954df",
+                "reference": "11b0e7a81faf1a279ebae72b40e218c209c954df",
                 "shasum": ""
             },
             "require-dev": {
@@ -42,9 +42,9 @@
             "description": "The Pancake project, a toolkit for PHP projects",
             "support": {
                 "issues": "https://github.com/guibranco/pancake/issues",
-                "source": "https://github.com/guibranco/pancake/tree/v1.7.15"
+                "source": "https://github.com/guibranco/pancake/tree/v1.7.16"
             },
-            "time": "2026-05-25T19:14:56+00:00"
+            "time": "2026-05-26T14:54:57+00:00"
         },
         {
             "name": "psr/container",
