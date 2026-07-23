@@ -11,13 +11,18 @@ class HomeControllerTest extends TestCase
 
     protected function setUp(): void
     {
+        $viewsPath = __DIR__ . '/../../app/Views';
+
         $this->router = new Router(new DIContainer());
-        $this->router->add('GET', '/home', [new HomeController(''), 'index']);
+        $this->router->add('GET', '/home', [new HomeController($viewsPath), 'index']);
     }
 
     public function testHomeRouteDispatch(): void
     {
-        $response = $this->router->dispatch('GET', '/home');
-        $this->assertEquals('Welcome to the Home page!', $response);
+        ob_start();
+        $this->router->dispatch('GET', '/home/');
+        $response = ob_get_clean();
+
+        $this->assertStringContainsString('Welcome to Our MVC Application', $response);
     }
 }

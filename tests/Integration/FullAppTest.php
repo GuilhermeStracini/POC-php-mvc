@@ -13,9 +13,11 @@ class FullAppTest extends TestCase
 
     protected function setUp(): void
     {
+        $viewsPath = __DIR__ . '/../../app/Views';
+
         $this->container = new DIContainer();
-        $this->container->set(HomeController::class, function () {
-            return new HomeController('');
+        $this->container->set(HomeController::class, function () use ($viewsPath) {
+            return new HomeController($viewsPath);
         });
 
         $this->router = new Router($this->container);
@@ -27,7 +29,10 @@ class FullAppTest extends TestCase
 
     public function testHomeRouteWithDI(): void
     {
-        $response = $this->router->dispatch('GET', '/home');
-        $this->assertEquals('Welcome to the Home page!', $response);
+        ob_start();
+        $this->router->dispatch('GET', '/home/');
+        $response = ob_get_clean();
+
+        $this->assertStringContainsString('Welcome to Our MVC Application', $response);
     }
 }

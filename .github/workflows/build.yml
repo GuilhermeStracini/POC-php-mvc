@@ -29,12 +29,14 @@ jobs:
         with:
           dev: yes
           progress: yes
+          php_version: 8.4
+          php_extensions: sockets
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v4
         with:
-          version: 11
-          php_version: 8.3
+          version: composer
+          php_version: 8.4
           php_extensions: xdebug
           coverage_cobertura: coverage.xml
           bootstrap: vendor/autoload.php
