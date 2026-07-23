@@ -29,6 +29,7 @@ jobs:
         with:
           dev: yes
           progress: yes
+          php_extensions: sockets
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v4
