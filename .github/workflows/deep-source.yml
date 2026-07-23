@@ -36,14 +36,14 @@ jobs:
             - name: PHPUnit Tests
               uses: php-actions/phpunit@v4
               with:
-                  version: 11
+                  version: composer
                   php_version: 8.3
                   php_extensions: xdebug
                   coverage_cobertura: coverage.xml
                   bootstrap: vendor/autoload.php
                   configuration: tests/phpunit.xml
                   test_suffix: Test.php
-                  args: --coverage-filter app src tests
+                  args: --coverage-filter app --coverage-filter src --coverage-filter tests
               env:
                   XDEBUG_MODE: coverage
 
