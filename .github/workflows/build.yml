@@ -29,6 +29,7 @@ jobs:
         with:
           dev: yes
           progress: yes
+          php_version: 8.4
           php_extensions: sockets
 
       - name: PHPUnit Tests
