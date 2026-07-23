@@ -28,14 +28,14 @@ class RouterTest extends TestCase
             return 'About Us';
         });
 
-        $response = $this->router->dispatch('GET', '/about');
+        $response = $this->router->dispatch('GET', '/about/');
         $this->assertEquals('About Us', $response);
     }
 
     public function testRouteNotFound(): void
     {
         $this->expectException(\Exception::class);
-        $this->router->dispatch('GET', '/non-existent');
+        $this->router->dispatch('GET', '/non-existent/');
     }
 
     public function testRouteWithQueryString(): void
@@ -44,7 +44,7 @@ class RouterTest extends TestCase
             return 'About Us';
         });
 
-        $response = $this->router->dispatch('GET', '/about?test=12345&qs=qs');
+        $response = $this->router->dispatch('GET', '/about/?test=12345&qs=qs');
         $this->assertEquals('About Us', $response);
     }
 }
