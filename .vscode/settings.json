@@ -9,5 +9,32 @@
         "connectionId": "guilhermestracini",
         "projectKey": "GuilhermeStracini_POC-php-mvc"
     },
-    "snyk.advanced.autoSelectOrganization": true
+    "snyk.advanced.autoSelectOrganization": true,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#0b03b0",
+        "activityBar.background": "#0b03b0",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#db0e04",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "activityBarTop.activeBackground": "#0b03b0",
+        "activityBarTop.background": "#0b03b0",
+        "activityBarTop.foreground": "#e7e7e7",
+        "activityBarTop.inactiveForeground": "#e7e7e799",
+        "commandCenter.border": "#e7e7e799",
+        "commandCenter.foreground": "#e7e7e7",
+        "sash.hoverBorder": "#0b03b0",
+        "statusBar.background": "#08027e",
+        "statusBar.debuggingBackground": "#08027e",
+        "statusBar.debuggingForeground": "#e7e7e7",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#0b03b0",
+        "statusBarItem.remoteBackground": "#bc0c03",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#08027e",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#08027e99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#08027e"
 }
