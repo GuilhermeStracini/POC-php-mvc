@@ -27,7 +27,7 @@ class FullAppTest extends TestCase
 
     public function testHomeRouteWithDI(): void
     {
-        $response = $this->router->dispatch('GET', '/home');
+        $response = $this->router->dispatch('GET', '/home/');
         $this->assertEquals('Welcome to the Home page!', $response);
     }
 }

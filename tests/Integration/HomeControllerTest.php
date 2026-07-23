@@ -17,7 +17,7 @@ class HomeControllerTest extends TestCase
 
     public function testHomeRouteDispatch(): void
     {
-        $response = $this->router->dispatch('GET', '/home');
+        $response = $this->router->dispatch('GET', '/home/');
         $this->assertEquals('Welcome to the Home page!', $response);
     }
 }
