@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         uses: "php-actions/composer@v6"
         with:
-          php_extensions: sockets
+          php_extensions: sockets mbstring
           dev: no
           progress: yes
           working_dir: "./poc-php-mvc/"
