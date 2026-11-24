@@ -30,7 +30,7 @@ jobs:
           dev: yes
           progress: yes
           php_version: 8.4
-          php_extensions: sockets
+          php_extensions: sockets mbstring
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v4
